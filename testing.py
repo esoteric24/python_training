@@ -64,34 +64,36 @@ from fractions import Fraction
 #             print('You entered an invalid integer')
 #
 # a = check_int(input('Please enter an integer: '))
-
-
-def check_Fraction(a):
-    from fractions import Fraction
-    try:
-        a = Fraction(a)
-        print(a)
-    except ValueError:
-        print('You entered an invalid fraction')
-    except ZeroDivisionError:
-        print('You entered an invalid fraction')
-
-a = check_Fraction(input('Enter a fraction: '))
-
-# z = input('Enter a complex number: ')
 #
-# try:
-#     z = complex(z)
-#     print(z)
-# except ValueError:
-#     z = z.replace(' ', '')
-#     z = z.replace('i', 'j')
+#
+# def check_Fraction(a):
+#     from fractions import Fraction
+#     try:
+#         a = Fraction(a)
+#         print(a)
+#     except ValueError:
+#         print('You entered an invalid fraction')
+#     except ZeroDivisionError:
+#         print('You entered an invalid fraction')
+#
+# a = check_Fraction(input('Enter a fraction: '))
+#
+#
+# def check_complex(z):
 #     try:
 #         z = complex(z)
 #         print(z)
 #     except ValueError:
-#         print('You entered an invalid complex number')
+#         z = z.replace(' ', '')
+#         z = z.replace('i', 'j')
+#         try:
+#             z = complex(z)
+#             print(z)
+#         except ValueError:
+#             print('You entered an invalid complex number')
 #
+# z = check_complex(input('Enter a complex number: '))
+
 # def is_factor(a, b):
 #     if b % a == 0:
 #         return True
