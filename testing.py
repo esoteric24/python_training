@@ -48,54 +48,13 @@ from fractions import Fraction
 # except ValueError:
 #     print('You entered an invalid number')
 
-# def check_int(a):
-#     try:
-#         a = float(a)
-#         if a.is_integer() == True:
-#             a = int(a)
-#             print('%s is a valid integer' % a)
-#         else:
-#             print('You entered an invalid integer')
-#     except ValueError:
-#         try:
-#             a = int(a)
-#             print('%s is a valid integer' % a)
-#         except ValueError:
-#             print('You entered an invalid integer')
+# from homegrownFunct import check_int, check_fraction, check_complex
 #
 # a = check_int(input('Please enter an integer: '))
 #
-#
-# def check_Fraction(a):
-#     from fractions import Fraction
-#     try:
-#         a = Fraction(a)
-#         print(a)
-#     except ValueError:
-#         print('You entered an invalid fraction')
-#     except ZeroDivisionError:
-#         print('You entered an invalid fraction')
-#
-# a = check_Fraction(input('Enter a fraction: '))
-#
-#
-# def check_complex(z):
-#     try:
-#         z = complex(z)
-#         print(z)
-#     except ValueError:
-#         z = z.replace(' ', '')
-#         z = z.replace('i', 'j')
-#         try:
-#             z = complex(z)
-#             print(z)
-#         except ValueError:
-#             print('You entered an invalid complex number')
+# a = check_fraction(input('Enter a fraction: '))
 #
 # z = check_complex(input('Enter a complex number: '))
 
-# def is_factor(a, b):
-#     if b % a == 0:
-#         return True
-#     else:
-#         return False
+from homegrownFunct import is_factor
+is_factor(4, 1024)
