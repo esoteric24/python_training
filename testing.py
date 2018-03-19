@@ -56,5 +56,5 @@ from fractions import Fraction
 #
 # z = check_complex(input('Enter a complex number: '))
 
-from homegrownFunct import is_factor
-is_factor(4, 1024)
+# from homegrownFunct import is_factor
+# is_factor(4, 1024)

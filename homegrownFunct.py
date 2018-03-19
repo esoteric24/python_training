@@ -38,9 +38,6 @@ def check_complex(z):
 
 def is_factor(a, b):
     if b % a == 0:
-        global value
-        value = True
-        return value
+        return True
     else:
-        value = False
-        return value
+        return False
