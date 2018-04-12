@@ -1,5 +1,6 @@
-from sympy import Poly, Symbol, sin, cos, tan
+from sympy import Poly, Symbol, sin, cos, tan, sympify
 from sympy import solve_poly_inequality, solve_rational_inequalities, solve_univariate_inequality
+x = Symbol('x')
 
 def poly_ineq(ineq):
     x = Symbol('x')
@@ -19,9 +20,12 @@ def rational_ineq(ineq):
     solution = solve_rational_inequalities([[((p1, p2), rel)]])
     return solution
 
-def otherwise_ineq(ineq):    
+def otherwise_ineq(ineq):
+    x = Symbol('x')
+    solution = solve_univariate_inequality(ineq, x, relational=False)
+    return solution
 
-def identify_ineq(ineq):
+def solve_ineq(ineq):
     x = Symbol('x')
     expr = ineq.lhs
     polyIden = expr.is_polynomial()
@@ -33,4 +37,11 @@ def identify_ineq(ineq):
         solution = rational_ineq(ineq)
         return solution
     else:
-        return 'univariate'
+        solution = otherwise_ineq(ineq)
+        return solution
+
+inequality = sympify(input('Enter an inequality (in terms of x and 0) to find its solution: '))
+solution = solve_ineq(inequality)
+print(' ')
+print('The solution to your inequality is: {0}'.format(solution))
+print(' ')
