@@ -42,7 +42,9 @@ print('{0:^30}{1:^30}'.format(dealtStrings[0], dealtStrings[1]))
 print('{0:^30}{1:^30}'.format(dealtStrings[2], '--------------'))
 
 playerHand = [dealtCards[0], dealtCards[2]]
+playerStrings = [dealtStrings[0], dealtStrings[2]]
 dealerHand = [dealtCards[1], dealtCards[3]]
+dealerStrings = [dealtStrings[1], dealtStrings[3]]
 
 def value_card(card):
     tenVals = ['10', 'jack', 'queen', 'king']
@@ -81,5 +83,43 @@ def value_hand(cards):
 playerVal = value_hand(playerHand)
 dealerVal = value_hand(dealerHand)
 
-# print(' ')
-print('{0:^0}{1:^15}{2:^45}'.format('TOTALS:', playerVal, '???'))
+dealerFaceVal = value_card(dealerHand[0])
+if dealerFaceVal == 'ace':
+    dealerFaceVal = 11
+
+print(' ')
+print('{0:^0}{1:^15}{2:^45}'.format('TOTALS:', playerVal, '{0} + ???'.format(dealerFaceVal)))
+print(' ')
+
+def print_hand(hand):
+    length = len(hand)
+    for number in range(length):
+        print('{0:^30}'.format(hand[number - 1]))
+
+while True:
+    playerRes = input('PLAYER: HIT OR STAND? ')
+    if playerRes == 'hit':
+        dealtCard = deck.pop(0)
+        playerHand.append(dealtCard)
+        cardString = dealtCard.rank + ' of ' + dealtCard.suit
+        playerStrings.append(cardString)
+        print(' ')
+        print('{0:^0}{1:^20}'.format('CARD:', cardString))
+        playerVal = value_hand(playerHand)
+        print(' ')
+        print('{0:^0}{1:^15}'.format('TOTAL:', playerVal))
+        print(' ')
+        if playerVal > 21:
+            print('{0:^27}'.format('BUST'))
+            print(' ')
+            break
+    elif playerRes == 'stand':
+        print(' ')
+        print('{0:^30}'.format('PLAYER\'S FINAL CARDS'))
+        print_hand(playerStrings)
+        print(' ')
+        print('{0:^0}{1:^15}'.format('TOTAL:', playerVal))
+        print(' ')
+        break
+    else:
+        print('Invalid input: try again')
