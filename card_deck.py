@@ -96,30 +96,95 @@ def print_hand(hand):
     for number in range(length):
         print('{0:^30}'.format(hand[number - 1]))
 
+def execute_hit1(deck, xHand, xStrings):
+    dealtCard = deck.pop(0)
+    xHand.append(dealtCard)
+    cardString = dealtCard.rank + ' of ' + dealtCard.suit
+    xStrings.append(cardString)
+    print(' ')
+    print('{0:^0}{1:^20}'.format('CARD:', cardString))
+
+def execute_hit2(xVal):
+    print(' ')
+    print('{0:^0}{1:^17}'.format('TOTAL:', xVal))
+    print(' ')
+
+def execute_stand(label, xStrings, xVal):
+     print(' ')
+     print('{0:^26}'.format('{0} FINAL CARDS').format(label))
+     print_hand(xStrings)
+     print(' ')
+     print('{0:^0}{1:^16}'.format('TOTAL:', xVal))
+     print(' ')
+
+
 while True:
     playerRes = input('PLAYER: HIT OR STAND? ')
+    label = 'PLAYER\'S'
     if playerRes == 'hit':
-        dealtCard = deck.pop(0)
-        playerHand.append(dealtCard)
-        cardString = dealtCard.rank + ' of ' + dealtCard.suit
-        playerStrings.append(cardString)
-        print(' ')
-        print('{0:^0}{1:^20}'.format('CARD:', cardString))
+        execute_hit1(deck, playerHand, playerStrings)
         playerVal = value_hand(playerHand)
-        print(' ')
-        print('{0:^0}{1:^15}'.format('TOTAL:', playerVal))
-        print(' ')
         if playerVal > 21:
-            print('{0:^27}'.format('BUST'))
+            execute_stand(label, playerStrings, playerVal)
+            print('{0:^28}'.format('BUST'))
             print(' ')
             break
+        else:
+            execute_hit2(playerVal)
     elif playerRes == 'stand':
-        print(' ')
-        print('{0:^30}'.format('PLAYER\'S FINAL CARDS'))
-        print_hand(playerStrings)
-        print(' ')
-        print('{0:^0}{1:^15}'.format('TOTAL:', playerVal))
-        print(' ')
+        execute_stand(label, playerStrings, playerVal)
         break
     else:
         print('Invalid input: try again')
+
+while True:
+    label = 'DEALER\'S'
+    if dealerVal < 17:
+        print('DEALER HITS')
+        execute_hit1(deck, dealerHand, dealerStrings)
+        dealerVal = value_hand(dealerHand)
+        if dealerVal > 21:
+            execute_stand(label, dealerStrings, dealerVal)
+            print('{0:^28}'.format('BUST'))
+            print(' ')
+            break
+        else:
+            execute_hit2(dealerVal)
+    elif dealerVal > 16:
+        print('DEALER STANDS')
+        execute_stand(label, dealerStrings, dealerVal)
+        break
+
+if playerVal > 21:
+    playerVal = 'BUST'
+if dealerVal > 21:
+    dealerVal = 'BUST'
+
+print('{0:^30}{1:^30}'.format('PLAYER\'S TOTAL', 'DEALER\'S TOTAL'))
+print('{0:^30}{1:^30}'.format(playerVal, dealerVal))
+
+dealerWin = '{0:^60}'.format('DEALER WINS')
+playerWin = '{0:^60}'.format('PLAYER WINS')
+tie = '{0:^60}'.format('TIE')
+
+if playerVal == 'BUST':
+    print(dealerWin)
+elif dealerVal == 'BUST':
+    if playerVal != 'BUST':
+        print(playerWin)
+else:
+    if playerVal > dealerVal:
+        print(playerWin)
+    elif dealerVal > playerVal:
+        print(dealerWin)
+    else:
+        if playerVal == 21 and dealerVal == 21:
+            if len(playerHand) == 2:
+                print(playerWin)
+            elif len(dealerHand) == 2:
+                print(dealerWin)
+            else:
+                print(tie)
+        else:
+            print(tie)
+print(' ')
