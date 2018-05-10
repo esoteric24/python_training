@@ -29,22 +29,17 @@ def transformation4(point):
     y1 = 0.16*y
     return x1, y1
 
-def get_index(probability):
+def get_index():
     r = random.random()
-    cumulProb = 0
-    sumProb = []
-    for p in probability:
-        cumulProb += p
-        sumProb.append(cumulProb)
-    for index, sp in enumerate(sumProb):
-        if r <= sp:
+    sumProb = [0.85, 0.92, 0.99, 1.0]
+    for index, value in enumerate(sumProb):
+        if r <= value:
             return index
     return len(probability)-1
 
 def transform(point):
     transformations = [transformation1, transformation2, transformation3, transformation4]
-    probability = [0.85, 0.07, 0.07, 0.01]
-    transIndex = get_index(probability)
+    transIndex = get_index()
     transFunct = transformations[transIndex]
     x, y = transFunct(point)
     return x, y
@@ -52,7 +47,6 @@ def transform(point):
 def draw_fern(num):
      x = [0]
      y = [0]
-
      x1, y1 = 0, 0
      for i in range(num):
          x1, y1 = transform((x1, y1))
