@@ -39,8 +39,8 @@ def get_index():
 
 def transform(point):
     transformations = [transformation1, transformation2, transformation3, transformation4]
-    transIndex = get_index()
-    transFunct = transformations[transIndex]
+    slot = get_index()
+    transFunct = transformations[slot]
     x, y = transFunct(point)
     return x, y
 
